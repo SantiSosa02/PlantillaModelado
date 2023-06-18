@@ -48,53 +48,133 @@ const validarProductos=() =>{
 
 
 const listarDatos = async () => {
-  try {
-    const response = await fetch(url, {
-      method: "GET",
-      mode: "cors",
-      headers: { "Content-type": "application/json; charset=UTF-8" },
-    });
+  let respuesta = '';
+  let body = document.getElementById('contenido');
 
-    if (response.ok) {
-      const data = await response.json();
-      const productos = data.productos;
-
-      let respuesta = "";
-      const body = document.getElementById("contenido");
-
+  fetch(url, {
+    method: 'GET',
+    mode: 'cors',
+    headers: { "Content-type": "application/json; charset=UTF-8" }
+  })
+    .then((resp) => resp.json())
+    .then(async function (data) {
+      let listaProductos = data.productos;
       const categorias = await obtenerCategorias(); // Obtener las categorías
 
-      productos.forEach((producto) => {
+      listaProductos.forEach((producto) => {
+        const row = document.createElement('tr');
+        const estadoCell = document.createElement('td');
+        const accionesCell = document.createElement('td');
+        const accionesDiv = document.createElement('div');
+        const editarIcon = document.createElement('a');
+        const eliminarIcon = document.createElement('a');
+        const switchLabel = document.createElement('label');
+        const switchInput = document.createElement('input');
+        const switchSpan = document.createElement('span');
+        const agregarEntrada = document.createElement('a');
+
+        estadoCell.textContent = producto.estado === 'true' ? 'activo' : 'inactivo';
+        switchInput.type = 'checkbox';
+        switchInput.checked = producto.estado === 'true'; // Establecer el estado del checkbox en función del valor actual
+
+        switchInput.addEventListener('change', function() {
+          console.log('Cambio de estado detectado');
+
+          Swal.fire({
+            title: '¿Estás seguro de cambiar el estado?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Aceptar',
+            cancelButtonText: 'Cancelar'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              console.log('Confirmación aceptada');
+
+              const productoId = producto._id;
+              const newEstado = this.checked ? 'true' : 'false'; // Actualizar el nuevo estado basado en el checkbox
+
+              console.log('Producto ID:', productoId);
+              console.log('Nuevo estado:', newEstado);
+
+              fetch(url + '?id=' + productoId, {
+                method: 'PUT',
+                mode: 'cors',
+                headers: { "Content-type": "application/json; charset=UTF-8" },
+                body: JSON.stringify({
+                  estado: newEstado
+                })
+              })
+                .then((resp) => resp.json())
+                .then(function (data) {
+                  console.log('Respuesta del servidor:', data);
+
+                  estadoCell.textContent = newEstado === 'true' ? 'activo' : 'inactivo';
+                  producto.estado = newEstado;
+                  console.log('Estado actualizado:', producto.estado);
+                })
+                .catch(function (error) {
+                  console.error('Error en la solicitud:', error);
+                });
+            } else {
+              console.log('Confirmación rechazada');
+
+              this.checked = !this.checked;
+            }
+          });
+        });
+
+        accionesDiv.classList.add('acciones');
+        editarIcon.classList.add('btn', 'btn-warning', 'mr-2');
+        editarIcon.innerHTML = '<i class="fas fa-pen"></i>';
+        eliminarIcon.classList.add('btn', 'btn-danger', 'mr-2');
+        eliminarIcon.innerHTML='<i class="fas fa-trash"></i>';
+        switchLabel.classList.add('switch', 'mr-2');
+        switchSpan.classList.add('slider');
+        switchSpan.classList.add('round');
+        agregarEntrada.classList.add('btn', 'btn-info', 'mr-2');
+        agregarEntrada.setAttribute('href', `/agregarEntrada`);
+        agregarEntrada.innerHTML = '<i class="fa-solid fa-plus"></i>';
+
+
+        editarIcon.onclick = function() {
+          editar(producto);
+        };
+
+        eliminarIcon.onclick = function() {
+          eliminar(producto._id);
+        };
+
+        switchLabel.appendChild(switchInput);
+        switchLabel.appendChild(switchSpan);
+        accionesDiv.appendChild(editarIcon);
+        accionesDiv.appendChild(eliminarIcon);
+        accionesDiv.appendChild(switchLabel);
+        accionesCell.appendChild(accionesDiv);
+        accionesDiv.appendChild(agregarEntrada);
+
+        row.setAttribute('data-id', producto._id); // Agregar el ID del producto como atributo
+
         // Buscar el nombre de la categoría correspondiente al ID
         const categoria = categorias.find((cat) => cat._id === producto.categoria);
         const nombreCategoria = categoria ? categoria.nombre : "";
 
-        respuesta += `<tr>
-          <td>${producto._id}</td>
-          <td>${producto.nombre}</td>
-          <td>${nombreCategoria}</td> 
-          <td>${producto.stockMinimo}</td>
-          <td>${producto.cantidad}</td>
-          <td>${producto.precioVenta}</td>
-          <td>${producto.estado}</td>
-          <td>
-              <a onclick='editar(${JSON.stringify(producto)})'><button class="btn btn-warning" ><i class="fas fa-pen"></i></button></a>
-              <label class="switch"><input type="checkbox" id="toggleSwitch"><span class="slider round"></span>
-              </label>
-              <a href="#"><button class="btn btn-info"><i class="fa-solid fa-plus"></i></button></a>
-              <button class="btn btn-danger" onclick="eliminar('${producto._id}')"><i class="fas fa-trash"></i></button>
-          </td>
-        </tr>`;
-      });
+        row.innerHTML = `<td>${producto._id}</td>` +
+          `<td>${producto.nombre}</td>` +
+          `<td>${nombreCategoria}</td>` +
+          `<td>${producto.stockMinimo}</td>` +
+          `<td>${producto.cantidad}</td>` +
+          `<td>${producto.precioVenta}</td>`;
 
-      body.innerHTML = respuesta;
-    } else {
-      console.error("Error al obtener la lista de productos:", response.status);
-    }
-  } catch (error) {
-    console.error("Error al realizar la solicitud:", error);
-  }
-};
+        row.appendChild(estadoCell);
+        row.appendChild(accionesCell);
+        body.appendChild(row);
+      });
+    })
+    .catch(function (error) {
+      console.error('Error en la solicitud:', error);
+    });
+}
+
 
 
   const registrar = async () => {

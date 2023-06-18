@@ -40,53 +40,127 @@ const valirVentas=()=>{
 }
 
 const listarDatos = async () => {
-    try {
-      const response = await fetch(url, {
-        method: "GET",
-        mode: "cors",
-        headers: { "Content-type": "application/json; charset=UTF-8" },
-      });
-  
-      if (response.ok) {
-        const data = await response.json();
-        const ventas = data.ventas;
-  
-        let respuesta = "";
-        const body = document.getElementById("contenido");
+  let respuesta = '';
+  let body = document.getElementById('contenido');
 
-        const clientes = await obtenerClientes(); // Obtener las categorías
+  fetch(url, {
+    method: 'GET',
+    mode: 'cors',
+    headers: { "Content-type": "application/json; charset=UTF-8" }
+  })
+    .then((resp) => resp.json())
+    .then(async function (data) {
+      let listaVentas = data.ventas;
+      const clientes = await obtenerClientes(); // Obtener las categorías
 
-        ventas.forEach((venta) => {
-          // Buscar el nombre de la categoría correspondiente al ID
-          const cliente = clientes.find((cli) => cli._id === venta.cliente);
-          const nombreCliente = cliente ? cliente.nombres : "";
-  
-          respuesta += `<tr>
-            <td>${venta._id}</td>
-            <td>${nombreCliente}</td>
-            <td>${venta.fecha}</td>
-            <td>${venta.numeroFactura}</td>
-            <td>${venta.metodoPago}</td>
-            <td>${venta.valorFactura}</td>
-            <td>${venta.estado}</td>
-            <td>
-                <a href="#"><button class="btn btn-info"><i class="fas fa-eye"></i></button></a>
-                <label class="switch"><input type="checkbox" id="toggleSwitch"><span class="slider round"></span>
-                </label>
-                <button class="btn btn-danger" onclick="eliminar('${venta._id}')"><i class="fas fa-trash"></i></button>
-          </td>
-            </td>
-          </tr>`;
+      listaVentas.forEach((venta) => {
+        const row = document.createElement('tr');
+        const estadoCell = document.createElement('td');
+        const accionesCell = document.createElement('td');
+        const accionesDiv = document.createElement('div');
+        const editarIcon = document.createElement('a');
+        const eliminarIcon = document.createElement('a');
+        const switchLabel = document.createElement('label');
+        const switchInput = document.createElement('input');
+        const switchSpan = document.createElement('span');
+
+        estadoCell.textContent = venta.estado === 'true' ? 'activo' : 'inactivo';
+        switchInput.type = 'checkbox';
+        switchInput.checked = venta.estado === 'true'; // Establecer el estado del checkbox en función del valor actual
+
+        switchInput.addEventListener('change', function() {
+          console.log('Cambio de estado detectado');
+
+          Swal.fire({
+            title: '¿Estás seguro de cambiar el estado?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Aceptar',
+            cancelButtonText: 'Cancelar'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              console.log('Confirmación aceptada');
+
+              const ventaId = venta._id;
+              const newEstado = this.checked ? 'true' : 'false'; // Actualizar el nuevo estado basado en el checkbox
+
+              console.log('Producto ID:', ventaId);
+              console.log('Nuevo estado:', newEstado);
+
+              fetch(url + '?id=' + ventaId, {
+                method: 'PUT',
+                mode: 'cors',
+                headers: { "Content-type": "application/json; charset=UTF-8" },
+                body: JSON.stringify({
+                  estado: newEstado
+                })
+              })
+                .then((resp) => resp.json())
+                .then(function (data) {
+                  console.log('Respuesta del servidor:', data);
+
+                  estadoCell.textContent = newEstado === 'true' ? 'activo' : 'inactivo';
+                  venta.estado = newEstado;
+                  console.log('Estado actualizado:', venta.estado);
+                })
+                .catch(function (error) {
+                  console.error('Error en la solicitud:', error);
+                });
+            } else {
+              console.log('Confirmación rechazada');
+
+              this.checked = !this.checked;
+            }
+          });
         });
-  
-        body.innerHTML = respuesta;
-      } else {
-        console.error("Error al obtener la lista de productos:", response.status);
-      }
-    } catch (error) {
-      console.error("Error al realizar la solicitud:", error);
-    }
-  };
+
+        accionesDiv.classList.add('acciones');
+        editarIcon.classList.add('btn', 'btn-warning', 'mr-2');
+        editarIcon.innerHTML = '<i class="fas fa-pen"></i>';
+        eliminarIcon.classList.add('btn', 'btn-danger', 'mr-2');
+        eliminarIcon.innerHTML='<i class="fas fa-trash"></i>';
+        switchLabel.classList.add('switch');
+        switchSpan.classList.add('slider');
+        switchSpan.classList.add('round');
+
+        editarIcon.onclick = function() {
+          editar(venta);
+        };
+
+        eliminarIcon.onclick = function() {
+          eliminar(venta._id);
+        };
+
+        switchLabel.appendChild(switchInput);
+        switchLabel.appendChild(switchSpan);
+        accionesDiv.appendChild(editarIcon);
+        accionesDiv.appendChild(eliminarIcon);
+        accionesDiv.appendChild(switchLabel);
+        accionesCell.appendChild(accionesDiv);
+
+        row.setAttribute('data-id', venta._id); // Agregar el ID del producto como atributo
+
+        // Buscar el nombre de la categoría correspondiente al ID
+        const cliente = clientes.find((cat) => cat._id === venta.cliente);
+        const nombreCliente = cliente ? cliente.nombres : "";
+
+        row.innerHTML = `<td>${venta._id}</td>` +
+          `<td>${nombreCliente}</td>` +
+          `<td>${venta.fecha}</td>` +
+          `<td>${venta.numeroFactura}</td>` +
+          `<td>${venta.metodoPago}</td>` +
+          `<td>${venta.valorFactura}</td>`;
+
+        row.appendChild(estadoCell);
+        row.appendChild(accionesCell);
+        body.appendChild(row);
+      });
+    })
+    .catch(function (error) {
+      console.error('Error en la solicitud:', error);
+    });
+}
+
 
   const registrar = async () => {
 const _cliente=document.getElementById("cliente").value;

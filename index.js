@@ -23,6 +23,11 @@ app.get("/",(req,res)=>{
     });
 })
 
+app.get("/perfil",(req,res)=>{
+    res.render("Perfil");
+})
+
+
 app.get("/categorias",(req,res)=>{
     res.render("categorias/categorias")   
 });
