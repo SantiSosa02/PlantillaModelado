@@ -56026,4 +56026,18 @@ a.text-muted:hover {
     padding: 5px;
 }
 
+.label-value-pair {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
+.value {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.label-value-pair p {
+    flex-grow: 1;
+    text-align: center;
+}

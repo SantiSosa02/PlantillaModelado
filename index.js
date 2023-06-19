@@ -177,6 +177,10 @@ app.get("/agregarVenta",(req,res)=>{
     });
 });
 
+app.get("/detalleVenta",(req,res)=>{
+    res.render("ventas/detalleVenta")
+});
+
 app.get("/abonos",(req,res)=>{
     const abonos=[
         {
@@ -212,6 +216,16 @@ app.get("/abonos",(req,res)=>{
 app.get('/agregarAbono',(req,res)=>{
     res.render("abonos/agregarabono",{
         titulo:"Agregar abono",
+    });
+});
+
+app.get('/detalleAbono',(req,res)=>{
+    res.render("abonos/detalleAbono",{
+        titulo:"Agregar abono",
+        numeroFactura:"123",
+        fechaAbono:"2023/4/6",
+        valorAbono:"20.000",
+        valorRestante:"50.000"
     });
 });
 

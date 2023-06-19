@@ -55,7 +55,7 @@ const listarDatos = async () => {
             <td>${abono.valorRestante}</td>
             <td>${abono.estado}</td>
             <td>
-                <a href="#"><button class="btn btn-info"><i class="fas fa-eye"></i></button></a>
+                <a href="/detalleAbono"><button class="btn btn-info"><i class="fas fa-eye"></i></button></a>
                 <button class="btn btn-danger" onclick="eliminar('${abono._id}')"><i class="fas fa-trash"></i></button>
           </td>
             </td>

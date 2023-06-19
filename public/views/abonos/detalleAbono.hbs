@@ -25,54 +25,51 @@
                     </div><!-- /.container-fluid -->
                 </section>
 
-                <section class="content1">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card custom-card"
-                                    style="max-width: 600px;">
-                                    <div class="card-header">
-                                        <h1 class="card-title">Perfil de Usuario</h1>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="form-group">
-                                            <div class="label-value-pair">
-                                                <label>Nombre:</label>
-                                                <p>Santiago</p>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="label-value-pair">
-                                                <label>Apellido:</label>
-                                                <p>Sosa</p>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="label-value-pair">
-                                                <label>Correo electrónico:</label>
-                                                <p>santiago@gmail.com</p>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="label-value-pair">
-                                                <label>Contraseña:</label>
-                                                <p>********</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="text-center">
-                                        <div
-                                            class="d-flex justify-content-center"
-                                            style="width: 16%;">
-                                            <a class="btn btn-success" href="/">Volver</a>
-                                        </div>
-                                    </div>
+                <div class="card custom-card" style="max-width: 600px;">
+                    <div class="card-header">
+                        <h1 class="card-title">Detalle de Venta</h1>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <div class="label-value-pair">
+                                <label for="numero-factura">Número de Factura:</label>
+                                <div class="value">
+                                    <p id="numero-factura">{{ numeroFactura }}</p>
                                 </div>
                             </div>
                         </div>
-
+                        <div class="form-group">
+                            <div class="label-value-pair">
+                                <label for="fecha-abono">Fecha de Abono:</label>
+                                <div class="value">
+                                    <p id="fecha-abono">{{ fechaAbono }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="label-value-pair">
+                                <label for="valor-abono">Valor de Abono:</label>
+                                <div class="value">
+                                    <p id="valor-abono">{{ valorAbono }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="label-value-pair">
+                                <label for="valor-restante">Valor Restante:</label>
+                                <div class="value">
+                                    <p id="valor-restante">{{ valorRestante }}</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </section>
+                       <div class="text-center">
+                    <div class="d-flex justify-content-center"
+                        style="width: 16%;">
+                        <a class="btn btn-success" href="/abonos">Volver</a>
+                    </div>
+                </div>
+                </div>
 
             </div>
             <!-- /.content-wrapper -->

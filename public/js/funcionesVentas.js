@@ -60,6 +60,7 @@ const listarDatos = async () => {
         const accionesDiv = document.createElement('div');
         const editarIcon = document.createElement('a');
         const eliminarIcon = document.createElement('a');
+        const detalleVentaIcon = document.createElement('a');
         const switchLabel = document.createElement('label');
         const switchInput = document.createElement('input');
         const switchSpan = document.createElement('span');
@@ -119,6 +120,9 @@ const listarDatos = async () => {
         editarIcon.innerHTML = '<i class="fas fa-pen"></i>';
         eliminarIcon.classList.add('btn', 'btn-danger', 'mr-2');
         eliminarIcon.innerHTML='<i class="fas fa-trash"></i>';
+        detalleVentaIcon.classList.add('btn', 'btn-info', 'mr-2');
+        detalleVentaIcon.innerHTML='<i class="fas fa-eye"></i>';
+        detalleVentaIcon.setAttribute('href', `/detalleVenta`);
         switchLabel.classList.add('switch');
         switchSpan.classList.add('slider');
         switchSpan.classList.add('round');
@@ -135,6 +139,7 @@ const listarDatos = async () => {
         switchLabel.appendChild(switchSpan);
         accionesDiv.appendChild(editarIcon);
         accionesDiv.appendChild(eliminarIcon);
+        accionesDiv.appendChild(detalleVentaIcon)
         accionesDiv.appendChild(switchLabel);
         accionesCell.appendChild(accionesDiv);
 
