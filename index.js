@@ -13,6 +13,9 @@ hbs.registerPartials(__dirname+ '/public/views/partials');
 app.get('/login',(req,res)=>{
     res.render("login")
 });
+app.get("/perfil",(req,res)=>{
+    res.render("perfil");
+})
 
 app.get("/",(req,res)=>{
 
@@ -22,11 +25,6 @@ app.get("/",(req,res)=>{
         consecutivo:'Home'
     });
 })
-
-app.get("/perfil",(req,res)=>{
-    res.render("Perfil");
-})
-
 
 app.get("/categorias",(req,res)=>{
     res.render("categorias/categorias")   
@@ -118,63 +116,7 @@ app.get("/ventas",(req,res)=>{
 });
 
 app.get("/agregarVenta",(req,res)=>{
-    const productosVenta=[
-        {
-            id:1,
-            producto:'Santiago',
-            cantidad:'2023/4/6',
-            precioU:'20000',
-            precioT:'Efectivo',
-            estado:'Activo'
-        },
-        {
-            id:1,
-            producto:'Santiago',
-            cantidad:'2023/4/6',
-            precioU:'20000',
-            precioT:'Efectivo',
-            estado:'Activo'
-        },
-        {
-            id:1,
-            producto:'Santiago',
-            cantidad:'2023/4/6',
-            precioU:'20000',
-            precioT:'Efectivo',
-            estado:'Activo'
-        }
-    ]
-
-    const serviciosVenta=[
-        {
-            id:1,
-            servicio:'Santiago',
-            cantidad:'2023/4/6',
-            precioU:'20000',
-            precioT:'Efectivo',
-            estado:'Activo'
-        },
-        {
-            id:1,
-            servicio:'Santiago',
-            cantidad:'2023/4/6',
-            precioU:'20000',
-            precioT:'Efectivo',
-            estado:'Activo'
-        },
-        {
-            id:1,
-            servicio:'Santiago',
-            cantidad:'2023/4/6',
-            precioU:'20000',
-            precioT:'Efectivo',
-            estado:'Activo'
-        }
-    ]
-    res.render("ventas/agregarVenta",{
-        lista_productosVenta:productosVenta,
-        lista_serviciosVenta : serviciosVenta
-    });
+    res.render("ventas/agregarVenta");
 });
 
 app.get("/detalleVenta",(req,res)=>{
@@ -182,35 +124,7 @@ app.get("/detalleVenta",(req,res)=>{
 });
 
 app.get("/abonos",(req,res)=>{
-    const abonos=[
-        {
-            id:1,
-            numeroFactura:'Santiago',
-            fechaAbono:'2023/4/6',
-            valorAbono:'20000',
-            valorRestante:'Efectivo',
-            estado:'Activo'
-        },
-        {
-            id:1,
-            numeroFactura:'Santiago',
-            fechaAbono:'2023/4/6',
-            valorAbono:'20000',
-            valorRestante:'Efectivo',
-            estado:'Activo'
-        },
-        {
-            id:1,
-            numeroFactura:'Santiago',
-            fechaAbono:'2023/4/6',
-            valorAbono:'20000',
-            valorRestante:'Efectivo',
-            estado:'Activo'
-        }
-    ]
-    res.render("abonos/abonos",{
-        lista_abonos:abonos
-    });
+    res.render("abonos/abonos");
 });
 
 app.get('/agregarAbono',(req,res)=>{
