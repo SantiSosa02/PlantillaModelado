@@ -270,17 +270,15 @@ const modificar = async () => {
   });
 };
 
-
-
-
 const eliminar = (_id) => {
   Swal.fire({
     title: '¿Está seguro?',
-    text: '¿Está seguro de que desea eliminar el usuario?',
+    text: '¿Está seguro de que desea eliminar la categoria?',
     icon: 'warning',
     showCancelButton: true,
     confirmButtonText: 'Sí',
-    cancelButtonText: 'No'
+    cancelButtonText: 'No',
+    showLoaderOnConfirm: true
   }).then((result) => {
     if (result.isConfirmed) {
       let categoria = {
@@ -298,9 +296,14 @@ const eliminar = (_id) => {
           Swal.fire({
             title: 'Eliminado',
             text: json.msg,
-            icon: 'success'
+            icon: 'success',
+            timer: 1000,
+            showConfirmButton: false
           });
-          location.reload();
+
+          setTimeout(() => {
+            location.reload(); // Recargar la página
+          }, 1000);
         })
         .catch(error => {
           Swal.fire({
@@ -313,6 +316,7 @@ const eliminar = (_id) => {
     }
   });
 };
+
 
 const buscarCategoria = async () => {
   const buscarCategoria = document.getElementById("buscarCategoria").value;

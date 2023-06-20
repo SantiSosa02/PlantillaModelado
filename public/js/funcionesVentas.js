@@ -369,7 +369,8 @@ const _valorFactura=document.getElementById("valorFactura").value;
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Sí',
-      cancelButtonText: 'No'
+      cancelButtonText: 'No',
+      showLoaderOnConfirm: true
     }).then((result) => {
       if (result.isConfirmed) {
         let venta = {
@@ -387,9 +388,14 @@ const _valorFactura=document.getElementById("valorFactura").value;
             Swal.fire({
               title: 'Eliminado',
               text: json.msg,
-              icon: 'success'
+              icon: 'success',
+              timer: 1000,
+              showConfirmButton: false
             });
-            location.reload();
+  
+            setTimeout(() => {
+              location.reload(); // Recargar la página
+            }, 1000);
           })
           .catch(error => {
             Swal.fire({
@@ -397,7 +403,7 @@ const _valorFactura=document.getElementById("valorFactura").value;
               text: 'Error al eliminar la venta',
               icon: 'error'
             });
-            console.error('Error al eliminar el usuario:', error);
+            console.error('Error al eliminar la venta:', error);
           });
       }
     });

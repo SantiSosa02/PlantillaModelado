@@ -271,46 +271,53 @@ const listarDatos = async () => {
   };
 
 
-    const eliminar = (_id) => {
-        Swal.fire({
-          title: '¿Está seguro?',
-          text: '¿Está seguro de que desea eliminar el servicio?',
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonText: 'Sí',
-          cancelButtonText: 'No'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            let servicio = {
-              _id: _id
-            };
-      
-            fetch(url, {
-              method: "DELETE",
-              mode: "cors",
-              headers: { "Content-type": "application/json; charset=UTF-8" },
-              body: JSON.stringify(servicio),
-            })
-              .then((resp) => resp.json())
-              .then(json => {
-                Swal.fire({
-                  title: 'Eliminado',
-                  text: json.msg,
-                  icon: 'success'
-                });
-                location.reload();
-              })
-              .catch(error => {
-                Swal.fire({
-                  title: 'Error',
-                  text: 'Error al eliminar el usuario',
-                  icon: 'error'
-                });
-                console.error('Error al eliminar el usuario:', error);
-              });
-          }
-        });
-      };
+  const eliminar = (_id) => {
+    Swal.fire({
+      title: '¿Está seguro?',
+      text: '¿Está seguro de que desea eliminar el servicio?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'No',
+      showLoaderOnConfirm: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        let servicio = {
+          _id: _id
+        };
+  
+        fetch(url, {
+          method: "DELETE",
+          mode: "cors",
+          headers: { "Content-type": "application/json; charset=UTF-8" },
+          body: JSON.stringify(servicio),
+        })
+          .then((resp) => resp.json())
+          .then(json => {
+            Swal.fire({
+              title: 'Eliminado',
+              text: json.msg,
+              icon: 'success',
+              timer: 1000,
+              showConfirmButton: false
+            });
+  
+            setTimeout(() => {
+              location.reload(); // Recargar la página
+            }, 1000);
+          })
+          .catch(error => {
+            Swal.fire({
+              title: 'Error',
+              text: 'Error al eliminar el servicio',
+              icon: 'error'
+            });
+            console.error('Error al eliminar el servicio:', error);
+          });
+      }
+    });
+  };
+  
 
 
       const buscarServicio = async () => {

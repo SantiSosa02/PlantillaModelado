@@ -137,7 +137,8 @@ const listarDatos = async () => {
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Sí',
-      cancelButtonText: 'No'
+      cancelButtonText: 'No',
+      showLoaderOnConfirm: true // Muestra el indicador de carga en lugar del botón "OK"
     }).then((result) => {
       if (result.isConfirmed) {
         let abono = {
@@ -155,21 +156,28 @@ const listarDatos = async () => {
             Swal.fire({
               title: 'Eliminado',
               text: json.msg,
-              icon: 'success'
+              icon: 'success',
+              timer: 1000,
+              showConfirmButton: false
             });
-            location.reload();
+  
+            // Redirigir a la página de abonos después de 1000 milisegundos (1 segundo)
+            setTimeout(() => {
+              window.location.href = '/abonos'; // Reemplaza '/abonos' con la URL correcta de la página de abonos
+            }, 1000);
           })
           .catch(error => {
             Swal.fire({
               title: 'Error',
-              text: 'Error al eliminar el usuario',
+              text: 'Error al eliminar el abono',
               icon: 'error'
             });
-            console.error('Error al eliminar el usuario:', error);
+            console.error('Error al eliminar el abono:', error);
           });
       }
     });
   };
+  
 
 
   const obtenerNumerosFacturaVentas = async () => {

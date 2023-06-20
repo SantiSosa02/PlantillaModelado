@@ -344,7 +344,6 @@ const registrar = async () => {
   };
   
   
-  
   const eliminar = (_id) => {
     Swal.fire({
       title: '¿Está seguro?',
@@ -352,7 +351,8 @@ const registrar = async () => {
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Sí',
-      cancelButtonText: 'No'
+      cancelButtonText: 'No',
+      showLoaderOnConfirm: true
     }).then((result) => {
       if (result.isConfirmed) {
         let usuario = {
@@ -370,9 +370,14 @@ const registrar = async () => {
             Swal.fire({
               title: 'Eliminado',
               text: json.msg,
-              icon: 'success'
+              icon: 'success',
+              timer: 1000,
+              showConfirmButton: false
             });
-            location.reload();
+  
+            setTimeout(() => {
+              location.reload(); // Recargar la página
+            }, 1000);
           })
           .catch(error => {
             Swal.fire({
