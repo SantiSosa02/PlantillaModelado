@@ -1,4 +1,4 @@
-const url = "http://localhost:8080/api/venta";
+const url = "https://plantillaapi.onrender.com/api/venta";
 
 const valirVentas=()=>{
     const expresionNumeroFactura= /^\d{1,500}$/
@@ -234,7 +234,7 @@ const _valorFactura=document.getElementById("valorFactura").value;
 
   const obtenerClientes = async () => {
     try {
-      const response = await fetch("http://localhost:8080/api/cliente", {
+      const response = await fetch("https://plantillaapi.onrender.com/api/cliente", {
         method: "GET",
         mode: "cors",
         headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -284,7 +284,7 @@ const _valorFactura=document.getElementById("valorFactura").value;
 
   const obtenerProductos = async () => {
     try {
-      const response = await fetch("http://localhost:8080/api/producto", {
+      const response = await fetch("https://plantillaapi.onrender.com/api/producto", {
         method: "GET",
         mode: "cors",
         headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -324,7 +324,7 @@ const _valorFactura=document.getElementById("valorFactura").value;
 
   const obtenerServicios = async () => {
     try {
-      const response = await fetch("http://localhost:8080/api/servicio", {
+      const response = await fetch("https://plantillaapi.onrender.com/api/servicio", {
         method: "GET",
         mode: "cors",
         headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -463,7 +463,7 @@ const _valorFactura=document.getElementById("valorFactura").value;
     // Supongamos que estás utilizando jQuery para simplificar la llamada AJAX
   
     $.ajax({
-      url: "http://localhost:8080/api/producto",
+      url: "https://plantillaapi.onrender.com/api/producto",
       method: 'GET',
       data: { productoId: productoId },
       success: function(response) {
@@ -522,7 +522,7 @@ const _valorFactura=document.getElementById("valorFactura").value;
     // Supongamos que estás utilizando jQuery para simplificar la llamada AJAX
   
     $.ajax({
-      url: "http://localhost:8080/api/producto",
+      url: "https://plantillaapi.onrender.com/api/producto",
       method: 'GET',
       data: { productoId: productoId },
       success: function(response) {
@@ -580,7 +580,7 @@ const _valorFactura=document.getElementById("valorFactura").value;
     // Supongamos que estás utilizando jQuery para simplificar la llamada AJAX
   
     $.ajax({
-      url: "http://localhost:8080/api/servicio",
+      url: "https://plantillaapi.onrender.com/api/servicio",
       method: 'GET',
       data: { servicioId: servicioId },
       success: function(response) {

@@ -1,4 +1,4 @@
-const url = "http://localhost:8080/api/abono";
+const url = "https://plantillaapi.onrender.com/api/abono";
 
 const validarAbono = () => {
     const expresionValorAbono = /^\d{1,3}(?:\.\d{3})*(?:\.\d+)?$/
@@ -174,7 +174,7 @@ const listarDatos = async () => {
 
   const obtenerNumerosFacturaVentas = async () => {
     try {
-      const response = await fetch("http://localhost:8080/api/venta", {
+      const response = await fetch("https://plantillaapi.onrender.com/api/venta", {
         method: "GET",
         mode: "cors",
         headers: { "Content-type": "application/json; charset=UTF-8" },

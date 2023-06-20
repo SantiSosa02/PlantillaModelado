@@ -1,4 +1,4 @@
-const url = "http://localhost:8080/api/servicio";
+const url = "https://plantillaapi.onrender.com/api/servicio";
 const validarServicios=()=>{
     const expresionNombre=/^[a-zA-Z]+ *[a-zA-Z]*$/;
     const expresionPrecioVenta=/^\d{1,3}(?:\.\d{3})*(?:\.\d+)?$/;

@@ -1,6 +1,6 @@
 const descargarPDFServicios = () => {
   console.log("Función descargarPDFServicios llamada");
-  const url = "http://localhost:8080/api/servicio";
+  const url = "https://plantillaapi.onrender.com/api/cliente";
 
   fetch(url, {
     method: "GET",
@@ -15,12 +15,12 @@ const descargarPDFServicios = () => {
       }
     })
     .then(data => {
-      const servicios = data.servicios;
+      const clientes = data.clientes;
 
       // Eliminar el campo _id, __v y categoria
-      const serviciosSinInformacion = servicios.map(servicio => {
-        const { _id, __v, categoria, ...servicioSinInformacion } = servicio;
-        return servicioSinInformacion;
+      const clientesSinInformacion = clientes.map(cliente => {
+        const { _id, __v, ...clientesSinInformacion } = cliente;
+        return clientesSinInformacion;
       });
 
       // Crear un nuevo documento PDF
@@ -31,12 +31,12 @@ const descargarPDFServicios = () => {
       doc.text("Servicios", doc.internal.pageSize.getWidth() / 2, 15 - 8, { align: "center" });
 
       // Agregar los datos de los servicios al PDF
-      const columns = Object.keys(serviciosSinInformacion[0]);
-      const rows = serviciosSinInformacion.map(servicio => Object.values(servicio));
+      const columns = Object.keys(clientesSinInformacion[0]);
+      const rows = clientesSinInformacion.map(cliente => Object.values(cliente));
       doc.autoTable({ head: [columns], body: rows });
 
       // Descargar el archivo PDF
-      doc.save("servicios.pdf");
+      doc.save("clientes.pdf");
 
       console.log('Archivo PDF de servicios generado y descargado exitosamente');
     })

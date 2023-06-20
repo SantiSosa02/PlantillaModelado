@@ -1,6 +1,6 @@
 const descargarPDFCategorias = () => {
     console.log("Función descargarPDFCategorias llamada");
-    const url = "http://localhost:8080/api/categoria";
+    const url = "https://plantillaapi.onrender.com/api/categoria";
   
     fetch(url, {
       method: "GET",

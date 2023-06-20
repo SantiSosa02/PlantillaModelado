@@ -1,6 +1,6 @@
 // Función para descargar el archivo Excel de clientes
 const descargarExcelClientes = async () => {
-    const url = "http://localhost:8080/api/cliente";
+    const url = "https://plantillaapi.onrender.com/api/cliente";
   
     try {
       const response = await fetch(url, {

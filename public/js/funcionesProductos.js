@@ -1,4 +1,4 @@
-const url = "http://localhost:8080/api/producto";
+const url = "https://plantillaapi.onrender.com/api/producto";
 
 const validarProductos=() =>{
     const expresionNombres= /^[a-zA-Z]+ *[a-zA-Z]*$/;
@@ -376,7 +376,7 @@ const listarDatos = async () => {
 
     const obtenerCategorias = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/categoria", {
+        const response = await fetch("https://plantillaapi.onrender.com/api/categoria", {
           method: "GET",
           mode: "cors",
           headers: { "Content-type": "application/json; charset=UTF-8" },

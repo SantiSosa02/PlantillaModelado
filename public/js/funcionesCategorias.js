@@ -1,4 +1,4 @@
-const url = "http://localhost:8080/api/categoria";
+const url = "https://plantillaapi.onrender.com/api/categoria";
 const validarFormulario = () => {
   const nombre = document.getElementById("nombre").value;
   const descripcion = document.getElementById("descripcion").value;

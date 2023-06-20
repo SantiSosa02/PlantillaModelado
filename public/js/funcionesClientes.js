@@ -1,4 +1,4 @@
-const url = "http://localhost:8080/api/cliente";
+const url = "https://plantillaapi.onrender.com/api/cliente";
 
 const validarClientes=() =>{
     const expresionNombres= /^[a-zA-Z]+ *[a-zA-Z]*$/;

@@ -1,6 +1,6 @@
 const descargarPDF = () => {
   console.log("Función descargarPDF llamada");
-  const url = "http://localhost:8080/api/usuario";
+  const url = "https://plantillaapi.onrender.com/api/usuario";
 
   fetch(url, {
     method: "GET",

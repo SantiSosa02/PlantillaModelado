@@ -1,7 +1,7 @@
 const descargarPDFProductos = () => {
     console.log("Función descargarPDFProductos llamada");
-    const urlProductos = "http://localhost:8080/api/producto";
-    const urlCategorias = "http://localhost:8080/api/categoria";
+    const urlProductos = "https://plantillaapi.onrender.com/api/producto";
+    const urlCategorias = "https://plantillaapi.onrender.com/api/categoria";
   
     // Obtener los productos
     fetch(urlProductos, {
