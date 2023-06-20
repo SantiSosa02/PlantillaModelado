@@ -1,5 +1,5 @@
 
-const url = "http://localhost:8080/api/usuario";
+const url = "https://plantillaapi.onrender.com/api/usuario";
 
 
 const validarUsuario=() =>{
