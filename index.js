@@ -127,11 +127,6 @@ app.get("/abonos",(req,res)=>{
     res.render("abonos/abonos");
 });
 
-app.get('/agregarAbono',(req,res)=>{
-    res.render("abonos/agregarabono",{
-        titulo:"Agregar abono",
-    });
-});
 
 app.get('/detalleAbono',(req,res)=>{
     res.render("abonos/detalleAbono",{
@@ -142,6 +137,13 @@ app.get('/detalleAbono',(req,res)=>{
         valorRestante:"60.000"
     });
 });
+
+app.get('/agregarAbono',(req,res)=>{
+    res.render("abonos/agregarabono",{
+        titulo:"Agregar abono",
+    });
+});
+
 
 app.get('*',(req,res)=>{
     res.render("404",{
