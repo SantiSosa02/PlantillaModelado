@@ -139,7 +139,7 @@ app.get('/detalleAbono',(req,res)=>{
         numeroFactura:"123",
         fechaAbono:"2023/4/6",
         valorAbono:"20.000",
-        valorRestante:"50.000"
+        valorRestante:"60.000"
     });
 });
 
