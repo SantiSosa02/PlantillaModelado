@@ -139,7 +139,7 @@ app.get('/detalleAbono',(req,res)=>{
 });
 
 app.get('/agregarAbono',(req,res)=>{
-    res.render("abonos/agregarabono",{
+    res.render("abonos/agregarAbono",{
         titulo:"Agregar abono",
     });
 });
