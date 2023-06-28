@@ -1,4 +1,5 @@
-const url = "https://plantillaapi.onrender.com/api/abono";
+//const url = "https://plantillaapi.onrender.com/api/abono";
+const url = "http://localhost:8080/api/abono";
 
 const validarAbono = () => {
     const expresionValorAbono = /^\d{1,3}(?:\.\d{3})*(?:\.\d+)?$/
@@ -56,8 +57,10 @@ const listarDatos = async () => {
             <td>${abono.estado}</td>
             <td>
                 <a href="/detalleAbono"><button class="btn btn-info"><i class="fas fa-eye"></i></button></a>
-                <button class="btn btn-danger" onclick="eliminar('${abono._id}')"><i class="fas fa-trash"></i></button>
-          </td>
+                <label class="switch">
+                <input type="checkbox" class="switch-input">
+                <span class="slider"></span>
+              </label>
             </td>
           </tr>`;
         });
@@ -119,7 +122,7 @@ const listarDatos = async () => {
           showConfirmButton: false, // Ocultar el botón de confirmación
         }).then(() => {
           listarDatos(); // Actualizar la lista de servicios
-          window.location.href = "/abonos";
+          window.location.href = "/abonoVenta";
         });
       } else {
         console.error("Error al agregar el abono:", response.status);
@@ -182,7 +185,7 @@ const listarDatos = async () => {
 
   const obtenerNumerosFacturaVentas = async () => {
     try {
-      const response = await fetch("https://plantillaapi.onrender.com/api/venta", {
+      const response = await fetch("http://localhost:8080/api/venta", {
         method: "GET",
         mode: "cors",
         headers: { "Content-type": "application/json; charset=UTF-8" },

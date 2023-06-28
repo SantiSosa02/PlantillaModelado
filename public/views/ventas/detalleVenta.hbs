@@ -1,153 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-     
-    {{> header}}
-    <title>{{ titulo }}</title>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
+        {{> header}}
+        <title>{{ titulo }}</title>
 
-</head>
+    </head>
 
-<body class="hold-transition sidebar-mini">
-    <div class="wrapper">
-        
-        {{>navbar}}
+    <body class="hold-transition sidebar-mini">
+        <div class="wrapper">
 
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            <section class="content-header">
-                <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1>VISOR</h1>
+            {{>navbar}}
+
+            <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <div class="container-fluid">
+                        <div class="row mb-2">
+                            <div class="col-sm-6">
+                                <h1>VISOR</h1>
+                            </div>
+                            <div class="col-sm-6">
+                                <ol class="breadcrumb float-sm-right">
+                                    <li class="breadcrumb-item"><a href="/">{{titulo}}</a></li>
+                                    <li class="breadcrumb-item active">{{consecutivo}}</li>
+                                </ol>
+                            </div>
                         </div>
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="/">{{titulo}}</a></li>
-                                <li class="breadcrumb-item active">{{consecutivo}}</li>
-                            </ol>
+                    </div><!-- /.container-fluid -->
+                </section>
+
+                <!-- Detalle de venta -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Detalle de venta</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="cliente">Clientes <span
+                                            style="color:red;">*</span></label>
+                                    <select class="form-control select2bs4"
+                                        id="cliente" style="width: 100%;" disabled>
+                                        <option selected="selected">Santiago
+                                            Sosa</option>
+
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="fecha">Fecha <span
+                                            style="color:red;">*</span></label>
+                                    <input type="text" class="form-control"
+                                        id="fecha" style="width: 100%;" value="20/06/2023"  disabled/>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="numeroFactura">Número de Factura
+                                        <span style="color:red;">*</span></label>
+                                    <input type="number" class="form-control"
+                                        id="numeroFactura"
+                                        placeholder="Digite el número de factura"
+                                        style="width: 100%;" value="1" disabled/>
+                                </div>
+                                <div class="texto" id="texto"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="metodoPago">Método de Pago <span
+                                            style="color:red;">*</span></label>
+                                    <select class="form-control select2bs4"
+                                        id="metodoPago" style="width: 100%;" disabled>
+                                        <option selected="selected"  >
+                                            Efectivo   </option>
+                                        <option>Efectivo</option>
+                                        <option>Tarjeta de crédito</option>
+                                        <option>Transferencia bancaria</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="valorFactura">Valor de Factura</label>
+                                    <input type="number" class="form-control"
+                                        id="valorFactura"
+                                        placeholder="Digite el valor de la factura"
+                                        style="width: 100%;" value="344.000" disabled/>
+                                </div>
+                                <div class="texto1" id="texto1"></div>
+
+                            </div>
+                             <div class="form-group">
+                                    <label for="valorFactura">Total productos</label>
+                                    <input type="number" class="form-control"
+                                        id="valorFactura"
+                                        placeholder="Digite el valor de la factura"
+                                        style="width: 100%;" value="300.000" disabled/>
+                                </div>
+                                <br><br>
+                                 <div class="form-group">
+                                    <label for="valorFactura">Total servicios</label>
+                                    <input type="number" class="form-control"
+                                        id="valorFactura"
+                                        placeholder="Digite el valor de la factura"
+                                        style="width: 100%;" value="44.000" disabled/>
+                                </div>
+                        </div>
+                        <h5>Productos</h5>
+                        <br>
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Producto</th>
+                                    <th>Cantidad</th>
+                                    <th>Precio unidad</th>
+                                    <th>Precio total</th>
+
+                                </tr>
+                            </thead>
+                            <tbody id="contenidoProductos">
+                                <tr>
+                                    <td>123</td>
+                                    <td>Llanta</td>
+                                    <td>3</td>
+                                    <td>50.000</td>
+                                    <td>150.000</td>
+                                </tr>
+                                <tr>
+                                    <td>5654</td>
+                                    <td>Cadenilla</td>
+                                    <td>1</td>
+                                    <td>150.000</td>
+                                    <td>150.000</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <br><br>
+                        <h5>Servicios</h5>
+                        <br>
+                        <table class="table table-bordered table-striped"
+                            id="tablaServicios">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Servicio</th>
+                                    <th>Cantidad</th>
+                                    <th>Precio unidad</th>
+                                    <th>Precio total</th>
+
+                                </tr>
+                            </thead>
+                            <tbody id="contenidoServicios">
+                                <tr>
+                                    <td>123</td>
+                                    <td>Mantenimiento</td>
+                                    <td>2</td>
+                                    <td>12.000</td>
+                                    <td>24.000</td>
+                                </tr>
+                                <tr>
+                                    <td>355</td>
+                                    <td>Lavada</td>
+                                    <td>1</td>
+                                    <td>20.000</td>
+                                    <td>20.000</td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+                    <div class="text-center">
+                        <div class="d-flex justify-content-center"
+                            style="width: 16%;">
+                            <a class="btn btn-success" href="/ventas">Volver</a>
                         </div>
                     </div>
-                </div><!-- /.container-fluid -->
-            </section>
-            
-            <!-- Detalle de venta -->
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Detalle de venta</h3>
+
                 </div>
-                <div class="card-body">
-                    <h5>Productos</h5>
-                    <br>
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Producto</th>
-                                <th>Cantidad</th>
-                                <th>Precio unidad</th>
-                                <th>Precio total</th>
-                        
-                            </tr>
-                        </thead>
-                        <tbody id="contenidoProductos">
-                            <tr>
-                                <td>123</td>
-                                <td>Llanta</td>
-                                <td>3</td>
-                                <td>50.000</td>
-                                <td>150.000</td>
-                            </tr>
-                             <tr>
-                                <td>5654</td>
-                                <td>Cadenilla</td>
-                                <td>1</td>
-                                <td>150.000</td>
-                                <td>150.000</td>
-                            </tr>
-                          
-                        </tbody>
-                    </table>
-                    <br><br>
-                    <h5>Servicios</h5>
-                    <br>
-                    <table class="table table-bordered table-striped" id="tablaServicios">
-                        <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Servicio</th>
-                                <th>Cantidad</th>
-                                <th>Precio unidad</th>
-                                <th>Precio total</th>
-                              
-                            </tr>
-                        </thead>
-                        <tbody id="contenidoServicios">
-                            <tr>
-                                <td>123</td>
-                                <td>Mantenimiento</td>
-                                <td>2</td>
-                                <td>12.000</td>
-                                <td>24.000</td>  
-                            </tr>
-                             <tr>
-                                <td>355</td>
-                                <td>Lavada</td>
-                                <td>1</td>
-                                <td>20.000</td>
-                                <td>20.000</td>  
-                            </tr>
-                        </tbody>
-                     
-                    </table>
-                </div>
-                   <div class="text-center">
-                    <div class="d-flex justify-content-center"
-                        style="width: 16%;">
-                        <a class="btn btn-success" href="/ventas">Volver</a>
-                    </div>
-                </div>
+                <!-- /Detalle de venta -->
 
             </div>
-            <!-- /Detalle de venta -->
-
+            <!-- /.content-wrapper -->
+            {{> footer}}
+            <!-- Control Sidebar -->
+            <aside class="control-sidebar control-sidebar-dark">
+                <!-- Control sidebar content goes here -->
+            </aside>
+            <!-- /.control-sidebar -->
         </div>
-        <!-- /.content-wrapper -->
-        {{> footer}}
-        <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-        </aside>
-        <!-- /.control-sidebar -->
-    </div>
-    <!-- ./wrapper -->
+        <!-- ./wrapper -->
 
-    <!-- jQuery -->
-    <script src="/plugins/jquery/jquery.min.js"></script>
-    <!-- Bootstrap 4 -->
-    <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- DataTables  & Plugins -->
-    <script src="/plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-    <script src="/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-    <script src="/plugins/jszip/jszip.min.js"></script>
-    <script src="/plugins/pdfmake/pdfmake.min.js"></script>
-    <script src="/plugins/pdfmake/vfs_fonts.js"></script>
-    <script src="/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-    <script src="/plugins/datatables-buttons/js/buttons.print.min.js"></script>
-    <script src="/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-    <script src="https://kit.fontawesome.com/4de2284caa.js" crossorigin="anonymous"></script>
-    <!-- AdminLTE App -->
-    <script src="/js/adminlte.min.js"></script>
+        <!-- jQuery -->
+        <script src="/plugins/jquery/jquery.min.js"></script>
+        <!-- Bootstrap 4 -->
+        <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- DataTables  & Plugins -->
+        <script src="/plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+        <script
+            src="/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+        <script
+            src="/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+        <script src="/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+        <script src="/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+        <script src="/plugins/jszip/jszip.min.js"></script>
+        <script src="/plugins/pdfmake/pdfmake.min.js"></script>
+        <script src="/plugins/pdfmake/vfs_fonts.js"></script>
+        <script src="/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+        <script src="/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+        <script src="/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+        <script src="https://kit.fontawesome.com/4de2284caa.js"
+            crossorigin="anonymous"></script>
+        <!-- AdminLTE App -->
+        <script src="/js/adminlte.min.js"></script>
 
-    <!-- Page specific script -->
-</body>
+        <!-- Page specific script -->
+    </body>
 
 </html>

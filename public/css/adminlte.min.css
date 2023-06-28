@@ -56041,3 +56041,9 @@ a.text-muted:hover {
     flex-grow: 1;
     text-align: center;
 }
+
+.imagenLogo{
+    width: 35%;
+    margin-left: 30%;
+    opacity: 0.4;
+}

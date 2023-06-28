@@ -1,4 +1,5 @@
-const url = "https://plantillaapi.onrender.com/api/cliente";
+//const url = "https://plantillaapi.onrender.com/api/cliente";
+const url = "http://localhost:8080/api/cliente";
 
 const validarClientes=() =>{
     const expresionNombres= /^[a-zA-Z]+ *[a-zA-Z]*$/;
@@ -65,7 +66,7 @@ const listarDatos = async () => {
         const accionesCell = document.createElement('td');
         const accionesDiv = document.createElement('div');
         const editarIcon = document.createElement('a');
-        const eliminarIcon = document.createElement('a');
+       // const eliminarIcon = document.createElement('a');
         const switchLabel = document.createElement('label');
         const switchInput = document.createElement('input');
         const switchSpan = document.createElement('span');
@@ -123,8 +124,8 @@ const listarDatos = async () => {
         accionesDiv.classList.add('acciones');
         editarIcon.classList.add('btn', 'btn-warning', 'mr-2');
         editarIcon.innerHTML = '<i class="fas fa-pen"></i>';
-        eliminarIcon.classList.add('btn', 'btn-danger', 'mr-2');
-        eliminarIcon.innerHTML='<i class="fas fa-trash"></i>';
+        //eliminarIcon.classList.add('btn', 'btn-danger', 'mr-2');
+        //eliminarIcon.innerHTML='<i class="fas fa-trash"></i>';
         switchLabel.classList.add('switch');
         switchSpan.classList.add('slider');
         switchSpan.classList.add('round');
@@ -133,14 +134,14 @@ const listarDatos = async () => {
           editar(cliente);
         };
 
-        eliminarIcon.onclick = function() {
+        /*eliminarIcon.onclick = function() {
           eliminar(cliente._id);
-        };
+        };*/
 
         switchLabel.appendChild(switchInput);
         switchLabel.appendChild(switchSpan);
         accionesDiv.appendChild(editarIcon);
-        accionesDiv.appendChild(eliminarIcon);
+        //accionesDiv.appendChild(eliminarIcon);
         accionesDiv.appendChild(switchLabel);
         accionesCell.appendChild(accionesDiv);
 
@@ -316,7 +317,7 @@ const listarDatos = async () => {
     });
   };
 
-  const eliminar = (_id) => {
+ /* const eliminar = (_id) => {
     Swal.fire({
       title: '¿Está seguro?',
       text: '¿Está seguro de que desea eliminar el cliente?',
@@ -361,7 +362,7 @@ const listarDatos = async () => {
           });
       }
     });
-  };
+  };*/
   
       const buscarCliente = async () => {
         const buscarCliente = document.getElementById("buscarCliente").value;

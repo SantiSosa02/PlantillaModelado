@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -14,15 +15,15 @@
     <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css" />
     <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css" />
     <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css" />
-            <!-- SweetAlert2 CSS -->
+    <!-- SweetAlert2 CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
 
     <!-- SweetAlert2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
 </head>
 
-<body class="hold-transition sidebar-mini">
-    <div class="wrapper">
+<body>
+    <div class="wrapper overflow-auto">
         {{> navbar}}
 
         <!-- Content Wrapper. Contains page content -->
@@ -32,7 +33,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Registro de Categorias</h1>
+                            <h1>Editar Categorias</h1>
                         </div>
                     </div>
                 </div><!-- /.container-fluid -->
@@ -45,33 +46,31 @@
                     <div class="card card-default">
                         <div class="card-header">
                             <h3 class="card-title">Editar  Categoria</h3>
-
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                        <input type="hidden" class="form-control" id="_id" style="width: 100%;" />
+                            <input type="hidden" class="form-control" id="_id" style="width: 100%;" />
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="categoria">Nombre</label>
+                                        <label for="categoria">Nombre <span style="color:red;">*</span></label>
                                         <input type="categoria" class="form-control" id="nombre"
                                             placeholder="Digite la categoria" style="width: 100%;" />
                                     </div>
-                                     <div class="texto" id="texto"></div>
+                                    <div class="texto" id="texto"></div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="categoria">Descripcion</label>
+                                        <label for="categoria">Descripcion <span style="color:red;">*</span></label>
                                         <input type="categoria" class="form-control" id="descripcion"
                                             placeholder="Digite la descripcion" style="width: 100%;" />
                                     </div>
-                                     <div class="texto1" id="texto1"></div>
-                                  
+                                    <div class="texto1" id="texto1"></div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-lg-6">
                                     <div class="form-group">
                                         <label for="estado">Estado</label>
-                                         <select class="form-control select2bs4" id="estado" style="width: 100%;">
+                                        <select class="form-control select2bs4" id="estado" style="width: 100%;">
                                             <option selected="selected">Elija el estado</option>
                                             <option>Activo</option>
                                             <option>Inactivo</option>
@@ -81,45 +80,31 @@
                                 </div>
                                 <!-- /.form-group -->
                             </div>
-                              
-                                 <div class="row"></div>
-                                 <input class="sendbtn btn btn-success" id="btnActualizar" type="button" value="Actualizar" onclick="modificar()">
-                                    <a href="/categorias"><button type="button" class="btn
-                                    btn-danger">Cancelar</button></a>
-                                     <script  src="js/funcionesCategorias.js"></script>
-                                <!-- /.card-body -->
-                            </div>
-
+                            <div class="row"></div>
+                            <input class="sendbtn btn btn-success" id="btnActualizar" type="button" value="Actualizar"
+                                onclick="modificar()">
+                            <a href="/categorias">
+                                <button type="button" class="btn btn-danger">Cancelar</button>
+                            </a>
+                            <script src="js/funcionesCategorias.js"></script>
                         </div>
-
-                       
+                        <!-- /.card-body -->
                     </div>
-                    
-
                     <!-- /.card -->
                 </div>
-                <!-- /.col -->
+                <!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
         </div>
-        <!-- /.row -->
-        <!-- /.container-fluid -->
-        </section>
-        <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
-    <footer class="main-footer">
-        <div class="float-right d-none d-sm-block">
-            <b>Version</b>
-            1.0.0
-        </div>
-        <strong>Copyright &copy; 2023 CosmeTIC.</strong>
-        All rights reserved.
-    </footer>
+        <!-- /.content-wrapper -->
 
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-        <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
+        {{> footer}}
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
 
@@ -127,7 +112,7 @@
     <script src="plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- DataTables  & Plugins -->
+    <!-- DataTables & Plugins -->
     <script src="plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
     <script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
@@ -141,7 +126,7 @@
     <script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
     <script src="https://kit.fontawesome.com/4de2284caa.js" crossorigin="anonymous"></script>
-     
+
     <!-- AdminLTE App -->
     <script src="js/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
@@ -151,12 +136,17 @@
         $(function () {
             $("#example1").DataTable({
                 "responsive": true,
-                "lengthChange": false, "autoWidth": false, "buttons": ["copy", "csv",
-                    "excel", "pdf", "print", "colvis"]
+                "lengthChange": false,
+                "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
             $('#example2').DataTable({
-                "paging": true, "lengthChange": false,
-                "searching": false, "ordering": true, "info": true, "autoWidth": false,
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
                 "responsive": true,
             });
         });

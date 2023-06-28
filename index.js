@@ -13,6 +13,14 @@ hbs.registerPartials(__dirname+ '/public/views/partials');
 app.get('/login',(req,res)=>{
     res.render("login")
 });
+
+app.get('/recuperar',(req,res)=>{
+    res.render("olvidarContraseña")
+});
+app.get('/nueva',(req,res)=>{
+    res.render("nuevaContraseña")
+});
+
 app.get("/perfil",(req,res)=>{
     res.render("perfil");
 })
@@ -140,6 +148,18 @@ app.get('/detalleAbono',(req,res)=>{
 
 app.get('/agregarAbono',(req,res)=>{
     res.render("abonos/agregarAbono",{
+        titulo:"Agregar abono",
+    });
+});
+
+app.get('/abonoVenta',(req,res)=>{
+    res.render("abonos/abonoVenta",{
+        titulo:"Agregar abono",
+    });
+});
+
+app.get('/agregarAbono2',(req,res)=>{
+    res.render("abonos/agregarAbono2",{
         titulo:"Agregar abono",
     });
 });

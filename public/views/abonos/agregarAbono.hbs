@@ -2,25 +2,30 @@
 <html lang="en">
 
     <head>
-           <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{{titulo}}</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>{{titulo}}</title>
 
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css" />
-    <!-- DataTables -->
-    <link rel="stylesheet" href="/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css" />
-    <link rel="stylesheet" href="/plugins/datatables-responsive/css/responsive.bootstrap4.min.css" />
-    <link rel="stylesheet" href="/plugins/datatables-buttons/css/buttons.bootstrap4.min.css" />
-            <!-- SweetAlert2 CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
+        <!-- Google Font: Source Sans Pro -->
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css" />
+        <!-- DataTables -->
+        <link rel="stylesheet"
+            href="/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css" />
+        <link rel="stylesheet"
+            href="/plugins/datatables-responsive/css/responsive.bootstrap4.min.css" />
+        <link rel="stylesheet"
+            href="/plugins/datatables-buttons/css/buttons.bootstrap4.min.css" />
+        <!-- SweetAlert2 CSS -->
+        <link rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
 
-    <!-- SweetAlert2 JS -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
-    
+        <!-- SweetAlert2 JS -->
+        <script
+            src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
+
     </head>
 
     <body class="hold-transition sidebar-mini">
@@ -47,21 +52,22 @@
                                     <!-- /.card-header -->
                                     <div class="card-body">
                                         <div class="row">
-                                               <div class="col-md-6">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="numeroFactura">Numero factura</label>
-                                                    <select
-                                                        class="form-control select2bs4"
-                                                        id="numeroFactura"
-                                                        style="width: 100%;">
-                                                        
-                                                    </select>
+                                                    <label for="numeroFactura">Numero
+                                                        factura <span
+                                                            style="color:red;">*</span></label>
+                                                    <br>
+                                                    <input type="numeroFactura"
+                                                        value="1" id="numeroFactura" disabled>
                                                 </div>
-                                                <div class="texto" id="texto"></div>
+                                                
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="fechaAbono">Fecha abono</label>
+                                                    <label for="fechaAbono">Fecha
+                                                        abono <span
+                                                            style="color:red;">*</span></label>
                                                     <input type="date"
                                                         class="form-control"
                                                         id="fechaAbono"
@@ -73,10 +79,12 @@
                                         </div>
                                         <!-- /.row -->
                                         <div class="row">
-                                            
+
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="valorAbono">Valor abono</label>
+                                                    <label for="valorAbono">Valor
+                                                        abono <span
+                                                            style="color:red;">*</span></label>
                                                     <input type="number"
                                                         class="form-control"
                                                         id="valorAbono"
@@ -85,7 +93,7 @@
                                                 </div>
                                                 <div class="texto2" id="texto2"></div>
                                             </div>
-                                             <div class="col-md-6">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="estado">Estado</label>
                                                     <select
@@ -175,10 +183,17 @@
         <!-- AdminLTE for demo purposes -->
         <script src="/js/demo.js"></script>
         <!-- Page specific script -->
-            <script>
+        <script>
   document.addEventListener("DOMContentLoaded", function() {
     obtenerNumerosFacturaVentas(); 
   });
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var fechaAbonoInput = document.getElementById("fechaAbono");
+        var fechaActual = new Date().toISOString().split("T")[0];
+        fechaAbonoInput.value = fechaActual;
+    });
 </script>
     </body>
 

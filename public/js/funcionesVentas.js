@@ -1,4 +1,5 @@
-const url = "https://plantillaapi.onrender.com/api/venta";
+//const url = "https://plantillaapi.onrender.com/api/venta";
+const url = "http://localhost:8080/api/venta";
 
 const valirVentas=()=>{
     const expresionNumeroFactura= /^\d{1,500}$/
@@ -58,9 +59,10 @@ const listarDatos = async () => {
         const estadoCell = document.createElement('td');
         const accionesCell = document.createElement('td');
         const accionesDiv = document.createElement('div');
-        const editarIcon = document.createElement('a');
-        const eliminarIcon = document.createElement('a');
+        const pdfIcon = document.createElement('button');
+        //const eliminarIcon = document.createElement('a');
         const detalleVentaIcon = document.createElement('a');
+        const abono = document.createElement('a');
         const switchLabel = document.createElement('label');
         const switchInput = document.createElement('input');
         const switchSpan = document.createElement('span');
@@ -116,31 +118,35 @@ const listarDatos = async () => {
         });
 
         accionesDiv.classList.add('acciones');
-        editarIcon.classList.add('btn', 'btn-warning', 'mr-2');
-        editarIcon.innerHTML = '<i class="fas fa-pen"></i>';
-        eliminarIcon.classList.add('btn', 'btn-danger', 'mr-2');
-        eliminarIcon.innerHTML='<i class="fas fa-trash"></i>';
+        pdfIcon.classList.add('btn', 'btn-primary', 'mr-2');
+        pdfIcon.innerHTML = '<i class="fas fa-file-pdf"></i>';
+        //eliminarIcon.classList.add('btn', 'btn-danger', 'mr-2');
+        //eliminarIcon.innerHTML='<i class="fas fa-trash"></i>';
         detalleVentaIcon.classList.add('btn', 'btn-info', 'mr-2');
         detalleVentaIcon.innerHTML='<i class="fas fa-eye"></i>';
         detalleVentaIcon.setAttribute('href', `/detalleVenta`);
-        switchLabel.classList.add('switch');
+        abono.classList.add('btn', 'btn-success', 'mr-2');
+        abono.innerHTML = '<i class="fa-solid fa-money-bill"></i>';
+        abono.setAttribute('href', `/abonoVenta`);
+        switchLabel.classList.add('switch','mr-2');
         switchSpan.classList.add('slider');
         switchSpan.classList.add('round');
 
-        editarIcon.onclick = function() {
-          editar(venta);
+        pdfIcon.onclick = function() {
+          generarPDF(venta);
         };
 
-        eliminarIcon.onclick = function() {
+        /*eliminarIcon.onclick = function() {
           eliminar(venta._id);
-        };
+        };*/
 
         switchLabel.appendChild(switchInput);
         switchLabel.appendChild(switchSpan);
-        accionesDiv.appendChild(editarIcon);
-        accionesDiv.appendChild(eliminarIcon);
-        accionesDiv.appendChild(detalleVentaIcon)
+        accionesDiv.appendChild(pdfIcon);
+        //accionesDiv.appendChild(eliminarIcon);
+        accionesDiv.appendChild(detalleVentaIcon);
         accionesDiv.appendChild(switchLabel);
+        accionesDiv.appendChild(abono);
         accionesCell.appendChild(accionesDiv);
 
         row.setAttribute('data-id', venta._id); // Agregar el ID del producto como atributo
@@ -154,17 +160,92 @@ const listarDatos = async () => {
           `<td>${venta.fecha}</td>` +
           `<td>${venta.numeroFactura}</td>` +
           `<td>${venta.metodoPago}</td>` +
-          `<td>${venta.valorFactura}</td>`;
+          `<td>${venta.valorFactura}</td>`+
+          `<td>${"60.000"}</td>`;
+
 
         row.appendChild(estadoCell);
         row.appendChild(accionesCell);
         body.appendChild(row);
+        
+
       });
     })
     .catch(function (error) {
       console.error('Error en la solicitud:', error);
     });
 }
+
+
+const generarPDF = () => {
+  // Datos fijos para el PDF
+  const venta = {
+    cliente: 'Santiago',
+    fecha: '2023-06-20',
+    numeroFactura: 1,
+    metodoPago: 'Efectivo',
+    valorFactura: 300000,
+    estado: 'Activo',
+    productos: [
+      { id: 123, nombre: 'Cadenilla', cantidad: 1, precio: 150000, precioTotal: 150000 },
+      { id: 456, nombre: 'Llanta', cantidad: 4, precio: 50000, precioTotal: 200000 }
+    ],
+    servicios: [
+      { id: 789, nombre: 'Mantenimiento', cantidad: 2, precio: 12000, precioTotal: 24000 },
+      { id: 987, nombre: 'Lavada', cantidad: 1, precio: 20000, precioTotal: 20000 }
+    ]
+  };
+
+  // Crear un nuevo documento PDF
+  const doc = new window.jspdf.jsPDF();
+
+  // Establecer el encabezado del PDF
+  doc.setFontSize(20);
+  doc.text("Venta ID: " + venta.numeroFactura, doc.internal.pageSize.getWidth() / 2, 15 - 8, { align: "center" });
+
+  // Agregar los datos de la venta al PDF
+  const columns = ['Cliente', 'Fecha venta', 'Numero factura', 'Metodo pago', 'Valor Factura', 'Estado'];
+  const row = [
+    venta.cliente,
+    venta.fecha,
+    venta.numeroFactura,
+    venta.metodoPago,
+    venta.valorFactura,
+    venta.estado
+  ];
+  const rows = [row];
+  doc.autoTable({ head: [columns], body: rows });
+
+  // Agregar tabla de productos
+  doc.text("Productos", 14, 60);
+  const columnsProductos = ['ID', 'Producto', 'Cantidad', 'Precio unidad', 'Precio total'];
+  const rowsProductos = venta.productos.map(producto => [
+    producto.id,
+    producto.nombre,
+    producto.cantidad,
+    producto.precio,
+    producto.precioTotal
+  ]);
+  doc.autoTable({ head: [columnsProductos], body: rowsProductos, startY: 65 });
+
+  // Agregar tabla de servicios
+  doc.text("Servicios", 14, doc.autoTable.previous.finalY + 10);
+  const columnsServicios = ['ID', 'Servicio', 'Cantidad', 'Precio unidad', 'Precio total'];
+  const rowsServicios = venta.servicios.map(servicio => [
+    servicio.id,
+    servicio.nombre,
+    servicio.cantidad,
+    servicio.precio,
+    servicio.precioTotal
+  ]);
+  doc.autoTable({ head: [columnsServicios], body: rowsServicios, startY: doc.autoTable.previous.finalY + 15 });
+
+  // Descargar el archivo PDF
+  doc.save("venta.pdf");
+
+  console.log('Archivo PDF de venta generado y descargado exitosamente');
+};
+
 
 
   const registrar = async () => {
@@ -234,7 +315,7 @@ const _valorFactura=document.getElementById("valorFactura").value;
 
   const obtenerClientes = async () => {
     try {
-      const response = await fetch("https://plantillaapi.onrender.com/api/cliente", {
+      const response = await fetch("http://localhost:8080/api/cliente", {
         method: "GET",
         mode: "cors",
         headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -284,7 +365,7 @@ const _valorFactura=document.getElementById("valorFactura").value;
 
   const obtenerProductos = async () => {
     try {
-      const response = await fetch("https://plantillaapi.onrender.com/api/producto", {
+      const response = await fetch("http://localhost:8080/api/producto", {
         method: "GET",
         mode: "cors",
         headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -324,7 +405,7 @@ const _valorFactura=document.getElementById("valorFactura").value;
 
   const obtenerServicios = async () => {
     try {
-      const response = await fetch("https://plantillaapi.onrender.com/api/servicio", {
+      const response = await fetch("http://localhost:8080/api/servicio", {
         method: "GET",
         mode: "cors",
         headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -362,7 +443,7 @@ const _valorFactura=document.getElementById("valorFactura").value;
     }
   };
 
-  const eliminar = (_id) => {
+  /*const eliminar = (_id) => {
     Swal.fire({
       title: '¿Está seguro?',
       text: '¿Está seguro de que desea eliminar la venta?',
@@ -407,7 +488,7 @@ const _valorFactura=document.getElementById("valorFactura").value;
           });
       }
     });
-  };
+  };*/
 
   const buscarVenta = async () => {
     const buscarVenta = document.getElementById("buscarVenta").value;
@@ -469,7 +550,7 @@ const _valorFactura=document.getElementById("valorFactura").value;
     // Supongamos que estás utilizando jQuery para simplificar la llamada AJAX
   
     $.ajax({
-      url: "https://plantillaapi.onrender.com/api/producto",
+      url: "http://localhost:8080/api/producto",
       method: 'GET',
       data: { productoId: productoId },
       success: function(response) {
@@ -511,8 +592,8 @@ const _valorFactura=document.getElementById("valorFactura").value;
         <td>${precioProducto}</td>
         <td>${precioTotal}</td>
         <td>
-          <button onclick="editarProducto(this)">Editar</button>
-          <button onclick="eliminarProducto(this)">Eliminar</button>
+          <button class="btn btn-warning" onclick="editarProducto(this)">Editar</button>
+          <button class="btn btn-danger" onclick="eliminarProducto(this)">Eliminar</button>
         </td>
       `;
       tablaProductos.appendChild(nuevaFila);
@@ -528,7 +609,7 @@ const _valorFactura=document.getElementById("valorFactura").value;
     // Supongamos que estás utilizando jQuery para simplificar la llamada AJAX
   
     $.ajax({
-      url: "https://plantillaapi.onrender.com/api/producto",
+      url: "http://localhost:8080/api/servicio",
       method: 'GET',
       data: { productoId: productoId },
       success: function(response) {
@@ -569,8 +650,8 @@ const _valorFactura=document.getElementById("valorFactura").value;
         <td>${precioServicio}</td>
         <td>${precioTotal}</td>
         <td>
-          <button onclick="editarServicio(this)">Editar</button>
-          <button onclick="eliminarServicio(this)">Eliminar</button>
+          <button class="btn btn-warning" onclick="editarServicio(this)">Editar</button>
+          <button class=" btn btn-danger" onclick="eliminarServicio(this)">Eliminar</button>
         </td>
       `;
       tablaServicios.appendChild(nuevaFila);
@@ -586,7 +667,7 @@ const _valorFactura=document.getElementById("valorFactura").value;
     // Supongamos que estás utilizando jQuery para simplificar la llamada AJAX
   
     $.ajax({
-      url: "https://plantillaapi.onrender.com/api/servicio",
+      url: "http://localhost:8080/api/servicio",
       method: 'GET',
       data: { servicioId: servicioId },
       success: function(response) {
@@ -602,11 +683,6 @@ const _valorFactura=document.getElementById("valorFactura").value;
     });
   }
   
-  
-  
-  
-
-
 
   document.addEventListener("DOMContentLoaded", () => {
     obtenerClientes();
