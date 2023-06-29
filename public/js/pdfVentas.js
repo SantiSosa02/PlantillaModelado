@@ -36,7 +36,7 @@ const descargarPDFVentas = () => {
 
           // Mapear las ventas y reemplazar el ID del cliente por su nombre
           const ventasConNombreCliente = ventas.map(venta => {
-            const { _id,__v, ...ventaSinId } = venta;
+            const { _id,__v,estado,productos,servicios,...ventaSinId } = venta;
             const clienteInfo = clientes.find(cliente => cliente._id === venta.cliente);
             const clienteNombre = clienteInfo ? clienteInfo.nombres : "Nombre no encontrado";
             return { ...ventaSinId, cliente: clienteNombre };

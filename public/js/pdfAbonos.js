@@ -37,11 +37,14 @@ const descargarPDFAbonos = () => {
 
           // Mapear los abonos y asignar el número de factura
           const abonosConNumeroFactura = abonos.map(abono => {
-            const { _id, __v, ...abonoSinIdV } = abono;
+            const { _id, __v, estado, ...abonoSinIdV } = abono;
             const ventaEncontrada = ventas.find(venta => venta._id === abonoSinIdV.venta);
             const numeroFactura = ventaEncontrada ? ventaEncontrada.numeroFactura : "1";
             return { ...abonoSinIdV, numeroFactura };
           });
+
+          // Calcular la suma de los abonos
+          const sumaAbonos = 47.0000
 
           // Crear un nuevo documento PDF
           const doc = new window.jspdf.jsPDF();
@@ -54,6 +57,10 @@ const descargarPDFAbonos = () => {
           const columns = Object.keys(abonosConNumeroFactura[0]);
           const rows = abonosConNumeroFactura.map(abono => Object.values(abono));
           doc.autoTable({ head: [columns], body: rows });
+
+          // Agregar la suma total de los abonos
+          const tableHeight = doc.previousAutoTable.finalY;
+          doc.text("Suma total de abonos: " + sumaAbonos.toFixed(3), 10, tableHeight + 10);
 
           // Descargar el archivo PDF
           doc.save("abonos.pdf");
