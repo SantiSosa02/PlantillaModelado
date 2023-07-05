@@ -131,6 +131,10 @@ app.get("/detalleVenta",(req,res)=>{
     res.render("ventas/detalleVenta")
 });
 
+app.get("/informeVentas",(req,res)=>{
+    res.render("ventas/informeVentas")
+});
+
 app.get("/abonos",(req,res)=>{
     res.render("abonos/abonos");
 });

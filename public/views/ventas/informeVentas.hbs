@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {{> header}}
+    <title>{{ titulo }}</title>
+
+</head>
+
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+
+        {{>navbar}}
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>VISOR</h1>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="/">{{titulo}}</a></li>
+                                <li class="breadcrumb-item active">{{consecutivo}}</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
+
+            <!-- Detalle de venta -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title text-center">Informe de ventas anuales</h3>
+                    <div class="año">2023</div>
+                </div>
+
+                <div class="card-body1">
+                    <div class="table-responsive">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Mes</th>
+                                    <th>Total Ventas</th>
+                                    <th>Cantidad Productos</th>
+                                    <th>Producto mas vendido</th>
+                                    <th>Cantidad Producto mas vendido</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Enero</td>
+                                    <td>3.000.000</td>
+                                    <th>25</th>
+                                    <th>Llanta</th>
+                                    <th>12</th>
+                                </tr>
+                                <tr>
+                                    <td>Febrero</td>
+                                    <td>5.256.000</td>
+                                    <th>30</th>
+                                    <th>Cadenilla</th>
+                                    <th>18</th>
+                                </tr>
+                                 <tr>
+                                    <td>Marzo</td>
+                                    <td>1.254.000</td>
+                                    <th>27</th>
+                                    <th>Camisa</th>
+                                    <th>20</th>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <canvas id="grafica-ventas"></canvas>
+                    </div>
+
+                </div>
+                <br><br>
+                <div class="text-center">
+                    <div class="d-flex justify-content-center" style="width: 16%;">
+                        <a class="btn btn-success" href="/ventas">Volver</a>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+        </div>
+        <!-- /.content-wrapper -->
+        {{> footer}}
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+    
+
+    <!-- ./wrapper -->
+
+    <!-- jQuery -->
+    <script src="/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- DataTables  & Plugins -->
+    <script src="/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="/plugins/jszip/jszip.min.js"></script>
+    <script src="/plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <script src="https://kit.fontawesome.com/4de2284caa.js" crossorigin="anonymous"></script>
+    <!-- AdminLTE App -->
+    <script src="/js/adminlte.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+    // Obtener el contexto del lienzo (canvas)
+    var ctx = document.getElementById('grafica-ventas').getContext('2d');
+
+    // Datos para la gráfica
+    var data = {
+        labels: ['Enero', 'Febrero', 'Marzo'], // Etiquetas para el eje X
+        datasets: [{
+            label: 'Total Ventas',
+            data: [3000000, 5256000, 1254000], // Valores para las barras
+            backgroundColor: 'rgba(75, 192, 192, 0.2)', // Color de fondo de las barras
+            borderColor: 'rgba(75, 192, 192, 1)', // Color del borde de las barras
+            borderWidth: 1 // Ancho del borde de las barras
+        }]
+    };
+
+    // Configuración de la gráfica
+    var options = {
+        responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    };
+
+    // Crear la gráfica de barras
+    var chart = new Chart(ctx, {
+        type: 'bar',
+        data: data,
+        options: options
+    });
+</script>
+
+
+
+    <!-- Page specific script -->
+</body>
+
+</html>

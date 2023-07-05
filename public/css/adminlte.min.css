@@ -56046,4 +56046,23 @@ a.text-muted:hover {
     width: 35%;
     margin-left: 30%;
     opacity: 0.4;
+
+}
+
+.año{
+   
+    width: 80px;
+    margin-left: 58%;
+    font-size: 20px;
+    padding: 2px;
+}
+
+.card-body1{
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10%;
+    margin-top: 25px;
+
 }
